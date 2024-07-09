@@ -1,46 +1,96 @@
-# Getting Started with Create React App
+# Form Submit Component
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project implements a Form Submit Component as per the Developer Exercise requirements. 
+The component serves as a command bar at the bottom of a form, displaying status and action buttons.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Status Icon
+- Status Message (with support for embedded links)
+- Submit button
+- Reset button
+- Dynamic state handling for:
+  - No changes
+  - Unsubmitted changes
+  - Validation errors
+  - Submitting state
+  - Success state
+  - Error state
+- Clickable error count to display validation errors
+- Customizable messages and icons
 
-### `npm start`
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- React
+- TypeScript
+- Material-UI
+- Zustand (for state management)
+- React Hook Form
+- Zod (for schema validation)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js (v14 or later)
+- npm
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository:
+`git clone https://github.com/your-username/form-submit-component.git`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Navigate to the project directory:
+`cd form-submit-component`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Install dependencies:
+`npm install`
 
-### `npm run eject`
+### Running the Application
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+To start the development server:
+`npm start`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The application will be available at `http://localhost:3000`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Project Structure
+- src/
+    - components/
+        - FormSubmitComponent/
+        - StatusIcon.tsx
+        - StatusMessage.tsx
+        - SubmitButton.tsx
+        - ResetButton.tsx
+    - index.tsx
+    - App.tsx
+    - index.tsx
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Usage
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The `FormSubmitComponent` is designed to be I/O and validation agnostic. It takes all necessary state as props:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```tsx
+<FormSubmitComponent
+  changeCount={changeCount}
+  errorCount={errorCount}
+  isSubmitting={isSubmitting}
+  isSuccess={isSuccess}
+  isError={isError}
+  onSubmit={handleSubmit}
+  onReset={handleReset}
+  onErrorClick={handleErrorClick}
+  statusMessage={statusMessage}
+  errorMessage={errorMessage}
+/>
+```
+
+## Contributing
+- Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+- This project is licensed under the MIT License.
+
+This README provides an overview of the project, its features, how to set it up, and how to use the Form Submit Component. It also includes sections for customization, testing (which you can fill in once you've implemented tests), and contribution guidelines.
+
+You may want to adjust some details like the repository URL, specific version requirements, or add more detailed usage examples depending on your exact implementation and needs.
