@@ -11,7 +11,7 @@ const ResetButton: React.FC<ResetButtonProps> = ({ onClick, disabled }) => (
   <Button
     variant="contained" 
     onClick={onClick}
-    disabled={disabled}
+    disabled={!disabled}
     color="success"
   >
     Reset

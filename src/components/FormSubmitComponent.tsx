@@ -30,9 +30,9 @@ const FormSubmitComponent: React.FC<FormSubmitComponentProps> = ({
   onErrorClick,
   statusMessage,
 }) => {
+
   const hasChanges = changeCount > 0;
   const hasErrors = errorCount > 0;
-
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', p: 2, borderTop: '1px solid #ccc' }}>
