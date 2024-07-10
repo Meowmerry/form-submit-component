@@ -13,7 +13,7 @@ const StatusMessage: React.FC<StatusMessageProps> = ({ message }) => {
     const parts = message.split(urlRegex);
 
     return (
-      <Typography variant="body2">
+      <Typography variant="body2" className="status-message">
         {parts.map((part, index) => {
           if (part.match(urlRegex)) {
             return (
@@ -28,8 +28,7 @@ const StatusMessage: React.FC<StatusMessageProps> = ({ message }) => {
     );
   }
  
-  // Otherwise render message directly
-  return <Typography variant="body2">{message}</Typography>;
+  return <Typography variant="body2" className="status-message">{message}</Typography>;
 };
 
 export default StatusMessage;

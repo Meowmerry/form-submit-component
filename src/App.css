@@ -1,14 +1,18 @@
+.container-form {
+    padding-top: 2rem;
+}
+
 .form-header {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #fff;
+    padding-top: 1rem;
 }
 
 .steam-icon {
-    width: 5rem;
-    height: 5rem;
-    border-radius: 50%;
     padding: 0.75rem;
+    height: 32px;
 }
 
 .footer-form {
@@ -21,4 +25,51 @@
 
 .error-messages {
     font-size: 0.75px;
+}
+
+.btn-submit {
+    background-color: #ffa400 !important;
+    color: #000 !important;
+}
+
+.btn-submit:hover {
+    background-color: white !important;
+}
+
+.btn-submit:disabled {
+    background-color: #fec55b !important;
+    color: #4a4a4a !important;
+    cursor: not-allowed !important;
+    opacity: 0.6 !important;
+}
+
+.btn-reset {
+    background-color: #0a7804 !important;
+    color: #000 !important;
+}
+
+.btn-reset:hover {
+    background-color: white !important;
+}
+
+.btn-reset:disabled {
+    background-color: #458042 !important;
+    color: #4a4a4a !important;
+    cursor: not-allowed !important;
+    opacity: 0.6 !important;
+}
+
+.status-message {
+    color: #fff !important;
+    margin-top: 0 !important;
+    margin-bottom: .5rem !important;
+    font-size: 1.25rem !important;
+    font-weight: 300 !important;
+    line-height: 1.3em !important;
+}
+
+@media (max-width: 768px) {
+    .responsive {
+        display: block;
+    }
 }

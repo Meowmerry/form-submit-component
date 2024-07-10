@@ -5,19 +5,8 @@ import StatusIcon from './StatusIcon';
 import StatusMessage from './StatusMessage';
 import SubmitButton from './SubmitButton';
 import ResetButton from './ResetButton';
+import {FormSubmitComponentProps} from '../interfaces/interfaces';
 
-interface FormSubmitComponentProps {
-  changeCount: number;
-  errorCount: number;
-  isSubmitting: boolean;
-  isSuccess: boolean;
-  isError: boolean;
-  onSubmit: () => void;
-  onReset: () => void;
-  onErrorClick: () => void;
-  statusMessage: React.ReactNode;
-  errorMessage: string;
-}
 
 const FormSubmitComponent: React.FC<FormSubmitComponentProps> = ({
   changeCount,
@@ -33,9 +22,17 @@ const FormSubmitComponent: React.FC<FormSubmitComponentProps> = ({
 
   const hasChanges = changeCount > 0;
   const hasErrors = errorCount > 0;
+  const canReset = changeCount > 0 || isSuccess || isError;
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', p: 2, borderTop: '1px solid #ccc' }}>
+    <Box  sx={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      p: 2,
+      borderTop: '1px solid #ccc',
+      flexDirection: { xs: 'column', sm: 'row' }, // xs: extra-small screens, sm: small screens and up
+    }} >
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <StatusIcon
           isSubmitting={isSubmitting}
@@ -43,7 +40,7 @@ const FormSubmitComponent: React.FC<FormSubmitComponentProps> = ({
           isError={isError}
           onErrorClick={onErrorClick}
         />
-        <StatusMessage message={statusMessage} />
+       <StatusMessage message={statusMessage} />
       </Box>
       <Box>
         <SubmitButton
@@ -52,7 +49,7 @@ const FormSubmitComponent: React.FC<FormSubmitComponentProps> = ({
         />
         <ResetButton
           onClick={onReset}
-          disabled={!hasChanges}
+          disabled={!canReset}
         />
       </Box>
     </Box>
@@ -60,3 +57,6 @@ const FormSubmitComponent: React.FC<FormSubmitComponentProps> = ({
 };
 
 export default FormSubmitComponent;
+
+
+
