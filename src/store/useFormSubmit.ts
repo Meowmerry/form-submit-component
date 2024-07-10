@@ -1,23 +1,29 @@
-// useFormStore
 import create from 'zustand';
 import {FormState} from '../interfaces/interfaces';
 
-export const useFormStore = create<FormState>(
-    (set) => ({
-        isError: false,
-        errorMessage: '',
-        formData: {name: '', email: '', services: '', date: null, description: ''},
-        setError: (errorMessage) => set({isError: true, errorMessage}),
-        resetState: () => set({
+export const useFormStore = create<FormState>((set) => ({
+    formData: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        quoteNumber: '',
+        status: '',
+        request: '',
+    },
+    resetState: () =>
+        set((state) => ({
+            ...state,
             isError: false,
             errorMessage: '',
-            formData: {name: '', email: '', services: '', date: null, description: ''}
-        }),
-        updateFormData: (data) => set({formData: data}),
-        clearAllData: () => set({
-            isError: false,
-            errorMessage: '',
-            formData: {name: '', email: '', services: '', date: null, description: ''}
-        })
-    })
-);
+            formData: {
+                firstName: '',
+                lastName: '',
+                email: '',
+                phone: '',
+                quoteNumber: '',
+                status: '',
+                request: '',
+            },
+        }))
+}));

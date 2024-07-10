@@ -12,19 +12,17 @@ export interface FormSubmitComponentProps {
 }
 
 export interface FormData {
-    name: string;
+    firstName: string;
+    lastName: string;
     email: string;
-    services: string;
-    date: Date | null | undefined;
-    description?: string;
+    phone: string;
+    quoteNumber: string;
+    status: string;
+    request: string;
 }
 
+
 export interface FormState {
-    isError: boolean;
-    errorMessage: string;
     formData: FormData;
-    setError: (errorMessage: string) => void;
     resetState: () => void;
-    updateFormData: (data: FormData) => void;
-    clearAllData: () => void;
 }

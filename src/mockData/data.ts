@@ -1,10 +1,5 @@
-export const servicesOptions = [
-    {name: 'Truckload', value: 'Truckload'},
-    {name: 'LTL', value: 'LTL'},
-    {name: 'Intermodal', value: 'Intermodal'},
-    {name: 'Drayage', value: 'Drayage'},
-    {name: 'Ocean', value: 'Ocean'},
-    {name: 'Air', value: 'Air'},
-    {name: 'Customs', value: 'Customs'},
-    {name: 'Freight Forwarding', value: 'Freight'},
+export const statusType = [
+    {name: 'Sales Follow Up', value: 'Sales Follow Up'},
+    {name: 'Technical Inquiry', value: 'Technical Inquiry'},
+    {name: 'Other', value: 'other'},
 ];

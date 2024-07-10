@@ -1,8 +1,7 @@
 import { Container } from '@mui/material';
-import FormHeader from './components/FormHeader';
+import FormHeader from './components/Form/FormHeader';
+import FormComponent from './components/Form/FormComponent';
 import './App.css';
-import FormComponent from './components/FormComponent';
-
 
 function App() {
   return (
