@@ -1,0 +1,45 @@
+import React from 'react';
+import { Box, Modal, Typography, Button } from '@mui/material';
+
+interface DialogModalProps {
+  isOpen: boolean;
+  message: string;
+  validationErrorMessage:string
+  onClose: () => void;
+}
+
+const DialogModal: React.FC<DialogModalProps> = ({ isOpen, message,validationErrorMessage, onClose }) => {
+  return (
+    <Modal
+      open={isOpen}
+      onClose={onClose}
+      aria-labelledby="error-modal-title"
+      aria-describedby="error-modal-description"
+    >
+      <Box sx={{
+        position: 'absolute',
+        top: '20%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4
+      }}>
+        <Typography id="error-modal-title" variant="h6" component="h2">
+          Error
+        </Typography>
+        <Typography id="error-modal-description" sx={{ mt: 2 }}>
+       {message}
+        </Typography>
+        <Typography id="error-modal-description" sx={{ mt: 2 }}>
+          {validationErrorMessage}
+        </Typography>
+        <Button onClick={onClose}>Close</Button>
+      </Box>
+    </Modal>
+  );
+};
+
+export default DialogModal;

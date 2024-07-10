@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type {FormData} from "../models/FormData";
+import type { FormData } from "../models/FormData";
 
 /** TODO
  * Mock API function simulating an asynchronous API call
@@ -8,9 +8,20 @@ import type {FormData} from "../models/FormData";
  * @returns A promise that resolves with the data or rejects with an error
  */
 
+export enum LoadingStatus {
+  LOADING = "LOADING",
+  SUCCESS = "SUCCESS",
+  NOT_LOADING = "NOT_LOADING",
+  ERROR = "ERROR"
+}
+
+export interface Loading {
+  displayName: LoadingStatus;
+  message: string;
+}
+
 export function mockAPI(data: FormData) {
-  
-  const successRate = 0.6; 
+  const successRate = 0.6;
   const delay = Math.random() * 2000;
 
   return new Promise((resolve, reject) => {
@@ -18,43 +29,49 @@ export function mockAPI(data: FormData) {
       if (Math.random() > 1 - successRate) {
         resolve(data);
       } else {
-        reject('Error');
-      }      
+        reject("Error");
+      }
     }, delay);
-  })
+  });
 }
 
 // Custom hook for managing API calls
 export function useAPI() {
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState('');
+  const [loading, setLoading] = useState<Loading>({
+    displayName: LoadingStatus.NOT_LOADING,
+    message: ""
+  });
 
   const reset = () => {
-    setSuccess(false);
-    setError('');
-  }
+    setLoading({
+      displayName: LoadingStatus.NOT_LOADING,
+      message: "Reset was successful."
+    });
+  };
 
   // Create function to make API call
   const callAPI = async (data: FormData) => {
-    setLoading(true);
-    setSuccess(false);
-    setError('');
+    setLoading({
+      displayName: LoadingStatus.LOADING,
+      message: "Loading..."
+    });
     try {
       await mockAPI(data);
-      setSuccess(true);
+      setLoading({
+        displayName: LoadingStatus.SUCCESS,
+        message: "Successfully saved."
+      });
     } catch (error) {
-      setError('Failed to save. Please try again.');
-    } finally {
-      setLoading(false);
+      setLoading({
+        displayName: LoadingStatus.ERROR,
+        message: "Failed to save. Please try again."
+      });
     }
-  }
+  };
 
   return {
     loading,
-    error,
-    success,
     callAPI,
-    reset,
-  }
+    reset
+  };
 }

@@ -1,4 +1,4 @@
-// FormSubmitComponent component
+// // FormSubmitComponent component
 import React from 'react';
 import { Box } from '@mui/material';
 import StatusIcon from '../Status/StatusIcon';
@@ -18,9 +18,10 @@ const FormSubmitComponent: React.FC<FormSubmitComponentProps> = ({
   onErrorClick,
   statusMessage,
 }) => {
-  const hasChanges = changeCount > 0;
-  const hasErrors = errorCount > 0;
-  const canReset = changeCount > 0 || isSuccess || isError;
+  const hasChanges:boolean = changeCount > 0;
+  const hasErrors:boolean = errorCount > 0;
+  const canReset:boolean = changeCount > 0 || isSuccess || isError;
+  const disabled: boolean = isSuccess || !hasChanges || hasErrors || isSubmitting
 
   return (
     <Box
@@ -57,7 +58,7 @@ const FormSubmitComponent: React.FC<FormSubmitComponentProps> = ({
       >
         <SubmitButton
           onClick={onSubmit}
-          disabled={!hasChanges || hasErrors || isSubmitting}
+          disabled={disabled}
         />
         <ResetButton onClick={onReset} disabled={!canReset} />
       </Box>

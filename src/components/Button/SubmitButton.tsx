@@ -12,7 +12,7 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({onClick, disabled}) => (
     variant="contained"
     className="btn-submit"
     onClick={onClick}
-    disabled={disabled} // message and make action buttons unclickable.
+    disabled={disabled} 
     sx={{mr: 1}}
   >
     Submit
