@@ -3,6 +3,9 @@
 This project implements a Form Submit Component as per the Developer Exercise requirements. 
 The component serves as a command bar at the bottom of a form, displaying status and action buttons.
 
+![readme](https://github.com/Meowmerry/form-submit-component/assets/50789325/ee28a9cd-8a81-4754-ade8-0c5551e18fb9)
+
+
 ## Features
 
 - Status Icon
