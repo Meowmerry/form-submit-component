@@ -16,22 +16,29 @@ const DialogModal: React.FC<DialogModalProps> = ({ isOpen, message,validationErr
       aria-labelledby="error-modal-title"
       aria-describedby="error-modal-description"
     >
-      <Box sx={{
+          <Box sx={{
         position: 'absolute',
         top: '20%',
         left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 400,
+        transform: 'translate(-50%, -20%)',
+        width: '90%',
+        maxWidth: 400,
         bgcolor: 'background.paper',
         border: '2px solid #000',
         boxShadow: 24,
-        p: 4
+        p: 4,
+        overflowY: 'auto',
+        '@media (max-width: 600px)': {
+          top: '20%',
+          maxWidth: 200,
+          p: 2,
+        }
       }}>
         <Typography id="error-modal-title" variant="h6" component="h2">
           Error
         </Typography>
         <Typography id="error-modal-description" sx={{ mt: 2 }}>
-       {message}
+          {message}
         </Typography>
         <Typography id="error-modal-description" sx={{ mt: 2 }}>
           {validationErrorMessage}

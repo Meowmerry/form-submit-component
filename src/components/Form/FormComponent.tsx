@@ -63,7 +63,7 @@ const FormComponent: React.FC = () => {
     if (changeCount) return `${changeCount} unsaved change${changeCount > 1 ? 's' : ''}`;
     return 'No changes';
   }, [loading, changeCount, errorCount]);
-
+  
   const allValidationErrors = useMemo(() => {
     const allErrors: Partial<Record<keyof FormData, string>> = {};
     Object.keys(errors).forEach((key) => {
@@ -75,8 +75,8 @@ const FormComponent: React.FC = () => {
       }
     });
     return allErrors;
-  }, [errors]);
-  
+  }, [Object.keys(errors)]);
+
 
   const messageErrorModal = loading.displayName === LoadingStatus.ERROR ? loading.message : statusMessage;
 
