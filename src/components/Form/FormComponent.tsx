@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Box, Grid } from '@mui/material';
-import { useForm, Controller, FieldErrors } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import FormSubmitComponent from './FormSubmitComponent';
 import { useFormStore } from '../../store/useFormSubmit';
@@ -63,10 +63,11 @@ const FormComponent: React.FC = () => {
     if (changeCount) return `${changeCount} unsaved change${changeCount > 1 ? 's' : ''}`;
     return 'No changes';
   }, [loading, changeCount, errorCount]);
+  const validationError =  Object.keys(errors)
   
   const allValidationErrors = useMemo(() => {
     const allErrors: Partial<Record<keyof FormData, string>> = {};
-    Object.keys(errors).forEach((key:string) => {
+    validationError.forEach((key:string) => {
       const fieldErrors = errors[key as keyof FormData];
       if (fieldErrors?.types) {
         allErrors[key as keyof FormData] = Object.values(fieldErrors.types).join(', ');
@@ -75,7 +76,7 @@ const FormComponent: React.FC = () => {
       }
     });
     return allErrors
-  }, [Object.keys(errors)]);
+  }, [validationError,errors]);
 
   const messageErrorModal = loading.displayName === LoadingStatus.ERROR ? loading.message : statusMessage;
 

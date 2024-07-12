@@ -49,7 +49,7 @@ const DialogModal: React.FC<DialogModalProps> = ({ isOpen, message,validationErr
           {message}
         </Typography>
         <Typography id="error-modal-description" sx={{ mt: 2 }}>
-          {formattedValidationErrorMessage}
+          {formattedValidationErrorMessage ? formattedValidationErrorMessage:''}
         </Typography>
         <Button onClick={onClose}>Close</Button>
       </Box>
