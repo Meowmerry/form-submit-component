@@ -9,6 +9,14 @@ interface DialogModalProps {
 }
 
 const DialogModal: React.FC<DialogModalProps> = ({ isOpen, message,validationErrorMessage, onClose }) => {
+
+  const formattedValidationErrorMessage = validationErrorMessage.split('\n').map((line, index) => (
+    <React.Fragment key={index}>
+      - {line}
+      <br />
+    </React.Fragment>
+  ));
+ 
   return (
     <Modal
       open={isOpen}
@@ -41,7 +49,7 @@ const DialogModal: React.FC<DialogModalProps> = ({ isOpen, message,validationErr
           {message}
         </Typography>
         <Typography id="error-modal-description" sx={{ mt: 2 }}>
-          {validationErrorMessage}
+          {formattedValidationErrorMessage}
         </Typography>
         <Button onClick={onClose}>Close</Button>
       </Box>

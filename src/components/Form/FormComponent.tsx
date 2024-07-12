@@ -66,7 +66,7 @@ const FormComponent: React.FC = () => {
   
   const allValidationErrors = useMemo(() => {
     const allErrors: Partial<Record<keyof FormData, string>> = {};
-    Object.keys(errors).forEach((key) => {
+    Object.keys(errors).forEach((key:string) => {
       const fieldErrors = errors[key as keyof FormData];
       if (fieldErrors?.types) {
         allErrors[key as keyof FormData] = Object.values(fieldErrors.types).join(', ');
@@ -74,11 +74,12 @@ const FormComponent: React.FC = () => {
         allErrors[key as keyof FormData] = fieldErrors?.message || '';
       }
     });
-    return allErrors;
+    return allErrors
   }, [Object.keys(errors)]);
 
-
   const messageErrorModal = loading.displayName === LoadingStatus.ERROR ? loading.message : statusMessage;
+
+  const validationErrorMessage = Object.values(allValidationErrors).join('\n')
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -185,7 +186,7 @@ const FormComponent: React.FC = () => {
       <DialogModal
         isOpen={isModalOpen}
         message={messageErrorModal}
-        validationErrorMessage={Object.values(allValidationErrors).join('\n')}
+        validationErrorMessage={validationErrorMessage}
         onClose={handleClose}
       />
     </form>
