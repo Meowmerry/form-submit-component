@@ -63,6 +63,7 @@ const FormComponent: React.FC = () => {
     if (changeCount) return `${changeCount} unsaved change${changeCount > 1 ? 's' : ''}`;
     return 'No changes';
   }, [loading, changeCount, errorCount]);
+  
   const validationError =  Object.keys(errors)
   
   const allValidationErrors = useMemo(() => {
@@ -85,7 +86,7 @@ const FormComponent: React.FC = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} height={110}>
           <label>First name *</label>
           <input type="text" {...register("firstName")} />
           {errors.firstName && (
@@ -94,7 +95,7 @@ const FormComponent: React.FC = () => {
             </Box>
           )}
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6}  height={110}>
           <label>Last name *</label>
           <input type="text" {...register("lastName")} />
           {errors.lastName && (
@@ -105,7 +106,7 @@ const FormComponent: React.FC = () => {
         </Grid>
       </Grid>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} height={110}>
           <label>Email *</label>
           <input type="text" {...register("email")} />
           {errors.email && (
@@ -114,7 +115,7 @@ const FormComponent: React.FC = () => {
             </Box>
           )}
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} height={110}>
           <label>Mobile number *</label>
           <input type="tel" {...register("phone")} />
           {errors.phone && (
@@ -124,6 +125,7 @@ const FormComponent: React.FC = () => {
           )}
         </Grid>
       </Grid>
+      <Grid  height={85}>
       <label>Quote Number *</label>
       <input type="number" {...register("quoteNumber")} />
       {errors.quoteNumber && (
@@ -131,7 +133,9 @@ const FormComponent: React.FC = () => {
           {Object.values(errors.quoteNumber.types || { default: errors.quoteNumber.message }).join(', ')}
         </Box>
       )}
-      <label>Status Type *</label>
+      </Grid>
+     <Grid height={80}>
+     <label>Status Type *</label>
       <Controller
         name="status"
         defaultValue=""
@@ -163,6 +167,8 @@ const FormComponent: React.FC = () => {
           </div>
         )}
       />
+     </Grid>
+      <Grid height={125}>
       <label>Request Detail *</label>
       <input type="text" {...register("request")} style={{ height: 80 }} />
       {errors.request && (
@@ -170,6 +176,7 @@ const FormComponent: React.FC = () => {
           {Object.values(errors.request.types || { default: errors.request.message }).join(', ')}
         </Box>
       )}
+      </Grid>
       <Box sx={{ mt: 2 }}>
         <FormSubmitComponent
           changeCount={changeCount}

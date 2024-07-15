@@ -20,20 +20,33 @@ export interface Loading {
   message: string;
 }
 
+// --- Mock API ----
 export function mockAPI(data: FormData) {
-  const successRate = 0.6;
+  const successRate = 0.60;
   const delay = Math.random() * 2000;
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (Math.random() > 1 - successRate) {
         resolve(data);
-      } else {
+      } 
+      else {
         reject("Error");
       }
-    }, delay);
+    }, 3000);
   });
 }
+
+// ---- Using for Demo  ---
+// export function mockAPI(data: FormData) {
+
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//         resolve(data);
+//         reject("Error"); 
+//     }, 3000);
+//   });
+// }
 
 // Custom hook for managing API calls
 export function useAPI() {
