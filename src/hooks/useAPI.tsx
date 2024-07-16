@@ -33,7 +33,7 @@ export function mockAPI(data: FormData) {
       else {
         reject("Error");
       }
-    }, 3000);
+    }, delay);
   });
 }
 
@@ -43,10 +43,11 @@ export function mockAPI(data: FormData) {
 //   return new Promise((resolve, reject) => {
 //     setTimeout(() => {
 //         resolve(data);
-//         reject("Error"); 
-//     }, 3000);
+//         // reject("Error"); 
+//     }, 2000);
 //   });
 // }
+
 
 // Custom hook for managing API calls
 export function useAPI() {
