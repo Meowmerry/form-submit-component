@@ -17,8 +17,14 @@ h1 {
     margin: 0 auto;
 }
 
-p {
+.text-error {
     color: #bf1650;
+    display: flex;
+}
+
+.text-success {
+    color: #006425;
+    display: flex;
 }
 
 input {

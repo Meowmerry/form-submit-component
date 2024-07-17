@@ -37,18 +37,6 @@ export function mockAPI(data: FormData) {
   });
 }
 
-// ---- Using for Demo  ---
-// export function mockAPI(data: FormData) {
-
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//         resolve(data);
-//         // reject("Error"); 
-//     }, 2000);
-//   });
-// }
-
-
 // Custom hook for managing API calls
 export function useAPI() {
   const [loading, setLoading] = useState<Loading>({
@@ -62,6 +50,7 @@ export function useAPI() {
       message: "Reset was successful."
     });
   };
+
 
   // Create function to make API call
   const callAPI = async (data: FormData) => {
@@ -82,10 +71,11 @@ export function useAPI() {
       });
     }
   };
+ 
 
   return {
     loading,
     callAPI,
-    reset
+    reset,
   };
 }

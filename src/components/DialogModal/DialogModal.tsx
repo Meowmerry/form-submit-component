@@ -1,30 +1,35 @@
 import React from 'react';
 import { Box, Modal, Typography, Button } from '@mui/material';
+import { Loading, LoadingStatus } from '../../hooks/useAPI';
+import ErrorIcon from '@mui/icons-material/Error';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 interface DialogModalProps {
   isOpen: boolean;
+  loading: Loading;
   message: string;
-  validationErrorMessage:string
+  validationErrorMessage: string;
   onClose: () => void;
 }
 
-const DialogModal: React.FC<DialogModalProps> = ({ isOpen, message,validationErrorMessage, onClose }) => {
+const DialogModal: React.FC<DialogModalProps> = ({ isOpen, loading, message, validationErrorMessage, onClose }) => {
+  const messageModal = loading.displayName === LoadingStatus.SUCCESS ? loading.message : message;
 
   const formattedValidationErrorMessage = validationErrorMessage.split('\n').map((line, index) => (
     <React.Fragment key={index}>
-      {line? `- ${line}`:''}
+      {line ? `- ${line}` : ''}
       <br />
     </React.Fragment>
   ));
- 
+
   return (
     <Modal
       open={isOpen}
       onClose={onClose}
-      aria-labelledby="error-modal-title"
-      aria-describedby="error-modal-description"
+      aria-labelledby="modal-title"
+      aria-describedby="modal-description"
     >
-          <Box sx={{
+      <Box sx={{
         position: 'absolute',
         top: '20%',
         left: '50%',
@@ -42,15 +47,21 @@ const DialogModal: React.FC<DialogModalProps> = ({ isOpen, message,validationErr
           p: 2,
         }
       }}>
-        <Typography id="error-modal-title" variant="h6" component="h2">
-          Error
+        <Typography id="modal-title" variant="h6" component="h2">
+          {loading.displayName === LoadingStatus.SUCCESS? 'Success' :'Error' }
         </Typography>
-        <Typography id="error-modal-description" sx={{ mt: 2 }}>
-          {message}
+        <Typography id="modal-description" sx={{ mt: 2 }}>
+          {loading.displayName === LoadingStatus.SUCCESS ? (
+            <div className="text-success"><CheckCircleIcon color="success" sx={{ mr: 1 }} />{messageModal}</div>
+          ) : (
+            <div className="text-error"><ErrorIcon color="error" sx={{ mr: 1 }} />{messageModal}</div>
+          )}
         </Typography>
-        <Typography id="error-modal-description" sx={{ mt: 2 }}>
-          {formattedValidationErrorMessage}
-        </Typography>
+        {validationErrorMessage && (
+          <Typography id="modal-description" sx={{ mt: 2 }} className="text-error">
+            {formattedValidationErrorMessage}
+          </Typography>
+        )}
         <Button onClick={onClose}>Close</Button>
       </Box>
     </Modal>

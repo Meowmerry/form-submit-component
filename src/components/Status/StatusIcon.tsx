@@ -5,16 +5,19 @@ import ErrorIcon from '@mui/icons-material/Error';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 interface StatusIconProps {
-  isSubmitting: boolean;
-  isSuccess: boolean;
-  isError: boolean;
+  loadingState: statusLoading;
   onErrorClick: () => void;
 }
+export interface statusLoading {
+  isSubmitting: boolean
+  isSuccess:boolean
+  isError:boolean
+}
 
-const StatusIcon: React.FC<StatusIconProps> = ({ isSubmitting, isSuccess, isError, onErrorClick }) => {
-  if (isSubmitting) return <CircularProgress size={24} sx={{ mr: 1 }} />;
-  if (isSuccess) return <CheckCircleIcon color="success" sx={{ mr: 1 }} />;
-  if (isError) {
+const StatusIcon: React.FC<StatusIconProps> = ({ loadingState, onErrorClick }) => {
+  if (loadingState.isSubmitting) return <CircularProgress size={24} sx={{ mr: 1 }} />;
+  if (loadingState.isSuccess) return <CheckCircleIcon color="success" sx={{ mr: 1 }} />;
+  if (loadingState.isError) {
     return (
       <Tooltip title="Click for more info">
         <IconButton onClick={onErrorClick} size="small">

@@ -1,14 +1,13 @@
+import {Loading} from "../hooks/useAPI";
+
 export interface FormSubmitComponentProps {
     changeCount: number;
     errorCount: number;
-    isSubmitting: boolean;
-    isSuccess: boolean;
-    isError: boolean;
+    loading: Loading;
     onSubmit: () => void;
     onReset: () => void;
     onErrorClick: () => void;
     statusMessage: React.ReactNode;
-    errorMessage: string;
 }
 
 export interface FormData {

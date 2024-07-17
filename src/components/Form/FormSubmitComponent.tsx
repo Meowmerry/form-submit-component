@@ -1,66 +1,55 @@
-// // FormSubmitComponent component
 import React from 'react';
 import { Box } from '@mui/material';
-import StatusIcon from '../Status/StatusIcon';
+import StatusIcon, { statusLoading } from '../Status/StatusIcon';
 import StatusMessage from '../Status/StatusMessage';
 import ResetButton from '../Button/ResetButton';
 import { FormSubmitComponentProps } from '../../interfaces/interfaces';
 import SubmitButton from '../Button/SubmitButton';
+import { LoadingStatus } from '../../hooks/useAPI';
 
 const FormSubmitComponent: React.FC<FormSubmitComponentProps> = ({
   changeCount,
   errorCount,
-  isSubmitting,
-  isSuccess,
-  isError,
+  loading,
   onSubmit,
   onReset,
   onErrorClick,
   statusMessage,
 }) => {
-  const hasChanges:boolean = changeCount > 0;
-  const hasErrors:boolean = errorCount > 0;
-  const canReset:boolean = changeCount > 0 || isSuccess || isError;
-  const disabled: boolean = isSuccess || !hasChanges || hasErrors || isSubmitting
+  const isSubmitting = loading.displayName === LoadingStatus.LOADING;
+  const isSuccess = loading.displayName === LoadingStatus.SUCCESS && errorCount === 0;
+  const isError = loading.displayName === LoadingStatus.ERROR || errorCount > 0;
+
+  const loadingState: statusLoading = { isSubmitting, isSuccess, isError };
+
+  const hasChanges = changeCount > 0;
+  const canReset = changeCount > 0 || isSuccess || isError;
+  const disabled = isSuccess || !hasChanges || isError || isSubmitting;
 
   return (
     <Box
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        p: 2,
-        borderTop: '1px solid #ccc',
-        flexDirection: { xs: 'column', sm: 'row' },
-      }}
+    sx={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      p: 2,
+      borderTop: '1px solid #ccc',
+      flexDirection: { xs: 'column', sm: 'row' },
+    }}
     >
       <Box
         sx={{
           display: 'flex',
           alignItems: 'center',
-          mb: { xs: 2, sm: 0 },
-          flexGrow: 1,
+          mr: 2,
         }}
       >
-        <StatusIcon
-          isSubmitting={isSubmitting}
-          isSuccess={isSuccess}
-          isError={isError}
-          onErrorClick={onErrorClick}
-        />
-        <StatusMessage message={statusMessage} />
+        <StatusIcon loadingState={loadingState} onErrorClick={onErrorClick} />
+        <StatusMessage  message={statusMessage} />
       </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          gap: 2,
-        }}
-      >
-        <SubmitButton
-          onClick={onSubmit}
-          disabled={disabled}
-        />
-        <ResetButton onClick={onReset} disabled={!canReset} />
+      <Box sx={{display: 'flex',gap: 2}}> 
+        <SubmitButton onClick={onSubmit} disabled={!canReset} />
+        <ResetButton onClick={onReset} disabled={disabled} />
       </Box>
     </Box>
   );
